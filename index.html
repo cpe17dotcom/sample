@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chackco &mdash; Digital Application Portfolio</title>
+    <meta name="description" content="Digital Application Portfolio of chackco (CPE17) featuring native Windows security utilities, browser extensions, and developer tools.">
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="chackco &mdash; Digital Application Portfolio">
+    <meta property="og:description" content="Lightweight native Windows security utilities, browser extensions, and developer tools.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Favicon (SVG Shield Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-base: #0b1120;
+            --bg-surface: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.75);
+            --bg-card-hover: rgba(30, 41, 59, 0.92);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(16, 185, 129, 0.4);
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Top Navigation */
+        .navbar-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.85);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .brand-text {
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text span {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff !important;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4.5rem 0 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #34d399;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #38bdf8 50%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.25rem;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.4rem;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            box-shadow: 0 4px 16px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: #1e293b;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-coffee {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+        }
+
+        .btn-coffee:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.45);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 0.9rem;
+            font-size: 0.86rem;
+            border-radius: 8px;
+        }
+
+        /* Hero Quick Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-card-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Headings */
+        .section-header {
+            margin: 4.5rem 0 2rem;
+            text-align: left;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+        }
+
+        /* Featured Grid */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--blue));
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(16, 185, 129, 0.08);
+        }
+
+        .app-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .app-icon-badge {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon-ak {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        .icon-badurl {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2));
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fbbf24;
+        }
+
+        .app-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: flex-end;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+        }
+
+        .tag-emerald {
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .tag-blue {
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .app-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .app-desc {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .feature-bullets {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .feature-item {
+            font-size: 0.86rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .card-actions .btn {
+            flex: 1;
+            min-width: 140px;
+            white-space: nowrap;
+        }
+
+        /* Placeholders & Tools Grid */
+        .placeholders-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .placeholder-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .placeholder-card:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35), 0 0 25px rgba(59, 130, 246, 0.1);
+        }
+
+        .placeholder-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
+
+        .placeholder-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .placeholder-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        .placeholder-desc {
+            font-size: 0.86rem;
+            color: #94a3b8;
+            line-height: 1.55;
+            margin-bottom: 1.25rem;
+        }
+
+        .placeholder-desc code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: rgba(15, 23, 42, 0.9);
+            color: #38bdf8;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .placeholder-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .placeholder-meta {
+            font-size: 0.76rem;
+            color: var(--text-subtle);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Tip & Support Section */
+        .support-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 4.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 30px rgba(245, 158, 11, 0.08);
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .support-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-text-area {
+            max-width: 650px;
+        }
+
+        .support-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fbbf24;
+            margin-bottom: 0.6rem;
+        }
+
+        .support-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .support-msg {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(15, 23, 42, 0.95);
+            padding: 2.5rem 0 2rem;
+            font-size: 0.88rem;
+            color: var(--text-subtle);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            font-size: 0.88rem;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .placeholders-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 820px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            .support-content {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            .support-text-area {
+                max-width: 100%;
+            }
+            .support-cta {
+                width: 100%;
+            }
+            .support-cta .btn {
+                width: 100%;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.25rem;
+            }
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                height: 64px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .nav-cta {
+                display: inline-flex;
+            }
+            .hero {
+                padding: 3rem 0 2rem;
+            }
+            .placeholders-grid {
+                grid-template-columns: 1fr;
+            }
+            .app-card {
+                padding: 1.5rem;
+            }
+            .card-actions .btn {
+                width: 100%;
+            }
+            .support-card {
+                padding: 1.75rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar-wrap">
+        <div class="container navbar">
+            <a href="#" class="brand-logo" aria-label="CPE17.com Home">
+                <div class="brand-icon">
+                    <!-- Shield Code Icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <span class="brand-text">CPE17<span>.com</span></span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#applications" class="nav-link">Applications</a></li>
+                <li><a href="#upcoming" class="nav-link">Lab &amp; Tools</a></li>
+                <li><a href="#support" class="nav-link">Support &amp; Coffee</a></li>
+                <li>
+                    <a href="https://github.com/chackco" target="_blank" rel="noopener noreferrer" class="nav-link nav-cta">
+                        <!-- GitHub Icon -->
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        GitHub Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">
+                <!-- Sparkles Icon -->
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v3m0 12v3M3 12h3m12 0h3m-2.93-6.07l-2.12 2.12m-9.9 9.9l-2.12 2.12m0-14.14l2.12 2.12m9.9 9.9l2.12 2.12"/>
+                </svg>
+                Digital Application Portfolio
+            </div>
+            
+            <h1 class="hero-title">
+                Crafting High-Performance <br>
+                <span class="gradient-text">Security &amp; Web Utilities</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Independent software solutions focused on speed, privacy, and proactive protection. Native Windows security utilities, lightweight browser extensions, and developer tooling.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#applications" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Explore Applications
+                </a>
+
+                <a href="https://buymeacoffee.com/chackco" target="_blank" rel="noopener noreferrer" class="btn btn-coffee">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                        <line x1="6" y1="1" x2="6" y2="4"/>
+                        <line x1="10" y1="1" x2="10" y2="4"/>
+                        <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                    Buy Me a Coffee
+                </a>
+            </div>
+
+            <!-- Quick Stat Highlights -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-card-title">Security First</div>
+                    <div class="stat-card-desc">Real-time heuristics &amp; threat neutralization</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-card-title">Native Performance</div>
+                    <div class="stat-card-desc">C++ native code with minimal memory footprint</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🌐</div>
+                    <div class="stat-card-title">Privacy Focused</div>
+                    <div class="stat-card-desc">Zero telemetry, local offline analysis</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Applications Section -->
+        <section id="applications">
+            <div class="section-header">
+                <div class="section-tag">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    Flagship Software
+                </div>
+                <h2 class="section-title">Featured Applications</h2>
+                <p class="section-desc">Active security software &amp; browser extension projects ready for deployment.</p>
+            </div>
+
+            <div class="featured-grid">
+                <!-- App 1: CPE17 Autorun Killer -->
+                <div class="app-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="app-icon-badge icon-ak">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M12 8v4"/>
+                                    <path d="M12 16h.01"/>
+                                </svg>
+                            </div>
+                            <div class="app-tags">
+                                <span class="tag tag-emerald">Windows Native</span>
+                                <span class="tag tag-blue">C++ Engine</span>
+                                <span class="tag">Security</span>
+                            </div>
+                        </div>
+
+                        <h3 class="app-title">
+                            CPE17 Autorun Killer
+                        </h3>
+
+                        <p class="app-desc">
+                            High-performance Windows utility engineered to automatically detect, quarantine, and terminate autorun malware, hidden script trojans, and double-extension threats from USB storage media in real time.
+                        </p>
+
+                        <ul class="feature-bullets">
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Instant Removable Drive Scanner:</strong> Intercepts and disarms suspicious autorun scripts the millisecond USB drives are plugged in.</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Registry &amp; Policy Repair:</strong> 1-Click repair for hijacked Task Manager, Registry Editor, Folder Options, and cmd prompt.</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Ultra-Low Resource Footprint:</strong> Native compiled C++ execution consuming negligible RAM &amp; CPU.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://git.new/autorunkiller" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            Download Now
+                        </a>
+                        
+                        <a href="https://cpe17.free.nf/ak_register.php" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            Register License
+                        </a>
+                    </div>
+                </div>
+
+                <!-- App 2: Bad URL Killer -->
+                <div class="app-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="app-icon-badge icon-badurl">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                                </svg>
+                            </div>
+                            <div class="app-tags">
+                                <span class="tag tag-emerald">Browser Extension</span>
+                                <span class="tag tag-blue">Anti-Phishing</span>
+                                <span class="tag">Web Guard</span>
+                            </div>
+                        </div>
+
+                        <h3 class="app-title">
+                            Bad URL Killer
+                        </h3>
+
+                        <p class="app-desc">
+                            Proactive browser security extension that shields users against malicious URLs, fraudulent phishing domains, deceptive redirect loops, and scam pages before connections are established.
+                        </p>
+
+                        <ul class="feature-bullets">
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Pre-Execution Link Inspection:</strong> Intercepts outbound web requests in real time to prevent harmful page rendering.</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Phishing &amp; Scam Filter:</strong> Curated detection rules targeting fraudulent login prompts, fake banking portals, and typo-squatters.</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span><strong>Zero Latency Browsing:</strong> Lightweight local rules evaluation with zero browsing slowdown and strict privacy protection.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://github.com/chackco/badurl/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="flex: 1;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            Got Issues?
+                        </a>
+
+                        <a href="https://ggl.link/badurlkiller" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="flex: 1;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Get Extension
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lab & Online Tools Section -->
+        <section id="upcoming">
+            <div class="section-header">
+                <div class="section-tag">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                    Lab &amp; Web Security Tools
+                </div>
+                <h2 class="section-title">Online Security Tools &amp; Utilities</h2>
+                <p class="section-desc">Specialized web utilities for threat intelligence, artifact inspection, and URL analysis.</p>
+            </div>
+
+            <div class="placeholders-grid">
+                <!-- Tool 1: Phishing Artifact Hunter -->
+                <div class="placeholder-card">
+                    <div>
+                        <div class="placeholder-top">
+                            <span style="font-size: 1.5rem;">🎯</span>
+                            <span class="placeholder-status">Beta</span>
+                        </div>
+                        <h4 class="placeholder-title">Phishing Artifact Hunter</h4>
+                        <p class="placeholder-desc">
+                            Automated phishing detection tool that inspects suspicious websites by scanning for deceptive DOM footprints, stolen brand artifacts, hidden forms, and credential harvesting kits.
+                        </p>
+                    </div>
+                    <div class="placeholder-footer">
+                        <div class="placeholder-meta">
+                            <span>🔍 Heuristic Artifact Scanner</span>
+                        </div>
+                        <a href="https://cpe17.free.nf/tools/phish.php" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">
+                            <span>Launch Tool</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tool 2: TAXII Client -->
+                <div class="placeholder-card">
+                    <div>
+                        <div class="placeholder-top">
+                            <span style="font-size: 1.5rem;">🛰️</span>
+                            <span class="placeholder-status">Beta</span>
+                        </div>
+                        <h4 class="placeholder-title">TAXII Client</h4>
+                        <p class="placeholder-desc">
+                            Cyber Threat Intelligence (CTI) feed explorer and TAXII client designed to query, ingest, parse, and analyze STIX/TAXII threat intelligence collections, threat actors, and IoCs directly in your browser.
+                        </p>
+                    </div>
+                    <div class="placeholder-footer">
+                        <div class="placeholder-meta">
+                            <span>⚡ STIX / TAXII CTI Feeds</span>
+                        </div>
+                        <a href="https://cpe17.free.nf/tools/taxii.php" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">
+                            <span>Launch Tool</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tool 3: URL Decoder -->
+                <div class="placeholder-card">
+                    <div>
+                        <div class="placeholder-top">
+                            <span style="font-size: 1.5rem;">🔓</span>
+                            <span class="placeholder-status">Beta</span>
+                        </div>
+                        <h4 class="placeholder-title">URL Decoder</h4>
+                        <p class="placeholder-desc">
+                            Security defanging &amp; decoding utility built to reverse sanitized and wrapped URLs (such as <code>[.]</code>, <code>[ ]</code>, <code>hxxp://</code>, percent-encodings, and email gateway rewrites like Proofpoint and SafeLinks) back into clean destination URLs.
+                        </p>
+                    </div>
+                    <div class="placeholder-footer">
+                        <div class="placeholder-meta">
+                            <span>🔗 Gateway &amp; Defanged Decoder</span>
+                        </div>
+                        <a href="https://cpe17.free.nf/tools/url.php" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">
+                            <span>Launch Tool</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tip Message & Buy Me a Coffee Section -->
+        <section id="support">
+            <div class="support-card">
+                <div class="support-content">
+                    <div class="support-text-area">
+                        <div class="support-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            Support Independent Software
+                        </div>
+                        <h3 class="support-title">Support Continued Development</h3>
+                        <p class="support-msg">
+                            All applications and utilities showcased here are developed with dedication to lightweight performance, user privacy, and clean system security.
+                        </p>
+                        <p class="support-msg" style="color: #94a3b8; font-size: 0.9rem;">
+                            If my tools have saved your time, cleaned your systems, or helped protect your devices, your kind tip or coffee donation is warmly appreciated! It directly assists with testing environments, hosting, and keeping the software free and up to date.
+                        </p>
+                    </div>
+
+                    <div class="support-cta">
+                        <a href="https://buymeacoffee.com/chackco" target="_blank" rel="noopener noreferrer" class="btn btn-coffee" style="padding: 0.9rem 1.6rem; font-size: 1rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                                <line x1="6" y1="1" x2="6" y2="4"/>
+                                <line x1="10" y1="1" x2="10" y2="4"/>
+                                <line x1="14" y1="1" x2="14" y2="4"/>
+                            </svg>
+                            ☕ Buy Me a Coffee
+                        </a>
+                        <span style="font-size: 0.78rem; color: #94a3b8;">Thank you for your generous encouragement!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <div class="footer-copy">
+                    Copyright &copy; <span id="yearSpan"></span> <strong>chackco</strong>. All rights reserved.
+                </div>
+                <div class="footer-note">
+                    Built for performance, privacy, and simplicity.
+                </div>
+            </div>
+
+            <ul class="footer-links">
+                <li>
+                    <a href="https://m.me/autorunkiller" target="_blank" rel="noopener noreferrer" class="footer-link" style="display: inline-flex; align-items: center; gap: 0.45rem;">
+                        <!-- Messenger SVG Icon -->
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.093.303 2.253.464 3.443.464 6.627 0 12-4.975 12-11.111C24 4.974 18.627 0 12 0zm1.191 14.963l-3.056-3.26-5.963 3.26 6.559-6.963 3.13 3.259 5.89-3.259-6.56 6.963z"/>
+                        </svg>
+                        Contact me on Facebook Messenger
+                    </a>
+                </li>
+                <li><a href="https://buymeacoffee.com/chackco" target="_blank" rel="noopener noreferrer" class="footer-link" style="color: #fbbf24;">☕ Buy Me a Coffee</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamically set current year in copyright notice
+        document.getElementById('yearSpan').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
