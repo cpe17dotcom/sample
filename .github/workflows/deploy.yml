@@ -19,6 +19,6 @@ jobs:
         uses: cloudflare/pages-action@1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # Optional or fetch from dashboard
-          projectName: cpe17 # Replace with your exact Cloudflare Pages project name
-          directory: . # The folder where your index.html is located
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: cpe17
+          directory: .
