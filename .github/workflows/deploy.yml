@@ -20,5 +20,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # Optional or fetch from dashboard
-          projectName: sample # Replace with your exact Cloudflare Pages project name
+          projectName: cpe17 # Replace with your exact Cloudflare Pages project name
           directory: . # The folder where your index.html is located
