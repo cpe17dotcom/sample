@@ -1,6 +1,7 @@
 name = "cpe17"
 main = "./index.html"
-compatibility_date = "2026-01-01"
+# Set this to today's date
+compatibility_date = "2026-08-20"
 
 [pages_build_output_dir]
 dir = "."
